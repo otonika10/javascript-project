@@ -117,7 +117,18 @@ class Gradebooks{
     }
     addRecord(gradebookId, record) {
         this.#gradebooks.get(gradebookId).records.push(record);
-                
+        if(typeof(record.teacherId)!='string'){
+            throw new Error ("Error: incorrect type")
+        }
+        if(typeof(record.subjectId)!='string'){
+            throw new Error ("Error: incorrect type")
+        }  
+        if(typeof(record.lesson)!='number'){
+            throw new Error ("Error: incorrect type")
+        }
+        if(typeof(record.mark)!='number'){
+            throw new Error ("Error: incorrect type")
+        }              
         let obj = {name:show.first+" "+show.last, 
         record:{teacherId: record.teacherId,
             subjectId: record.subjectId,
