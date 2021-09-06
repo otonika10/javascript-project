@@ -494,3 +494,108 @@ groups.update(groupId, {
   });
 groups.read(groupId);
 groups.readAll()
+//gradebook
+
+class Gradebooks{
+    gradebooks = new Map();
+    groups:string
+    teachers:string
+    lms:string
+    constructor(groups:any, teachers:any, lms:any) {
+        this.groups = groups.readAll();
+        this.teachers = teachers.readAll();
+        this.lms = lms.readAll();
+    }
+    add(level:number, groupId:string) {
+        let id =  "Grb" + Math.floor(Math.random()*90+10);
+        this.gradebooks.set(id, { id, groupId, level, records: [] });
+        //console.log(this.#gradebooks)
+        return this.gradebooks.get(id);
+    }
+    clear() {
+        this.gradebooks.get(gradebookId).records.splice(0);
+
+        //console.log(this.gradebooks)
+    }
+    addRecord(gradebookId:string, record:Rec_check) {
+        this.gradebooks.get(gradebookId).records.push(record);
+                
+        let obj = {name:show.first+" "+show.last, 
+        record:{teacherId: record.teacherId,
+            subjectId: record.subjectId,
+            lesson: record.lesson,
+            mark: record.mark}}
+        let obj2 = {name:show2.name.first+" "+show2.name.last, 
+        record:{teacherId: record2.teacherId,
+        subjectId: record2.subjectId,
+        lesson: record2.lesson,
+        mark: record2.mark}}
+        let obj3 = {name:show3.name.first+" "+show3.name.last, 
+        record:{teacherId: record.teacherId,
+            subjectId: record.subjectId,
+            lesson: record.lesson,
+            mark: record.mark}}
+        let arr = [];
+        arr.push(obj,obj2,obj3)
+        this.gradebooks.get(gradebookId).records = arr;
+         //console.log(this.#gradebooks.get(gradebookId));
+    }
+    read(gradebookId:string, pupilId:string) {//from show method
+      //if we will change |var show0 = pupils.show(pupil.id)| to |var show0 = pupils.show(pupil2.id)| we will get pupil2 and etc.
+         for(let i in this.gradebooks.get(gradebookId).records){
+            if(show0.first +" "+show0.last == this.gradebooks.get(gradebookId).records[i].name){
+                return this.gradebooks.get(gradebookId).records[i]
+            }
+            if(typeof(show0.name)!='undefined'){
+            if(show0.name.first +" "+show0.name.last == this.gradebooks.get(gradebookId).records[i].name){
+                return this.gradebooks.get(gradebookId).records[i]
+            } 
+            }
+        } 
+       
+    }
+          
+        
+    
+    readAll(gradebookId:string):[Rec_check]{   
+        return this.gradebooks.get(gradebookId).records;
+        //clear removes records too so we cant return records in that case in that case we need /return this.gradebooks/
+    }
+    
+}
+const pupilId:string = pupil.id;
+const pupilId2:string = pupil2.id;
+const pupilId3:string = pupil2.id;
+const gradebooks = new Gradebooks(groups, teachers, lms);
+const level:number = 1;
+const gradebook = gradebooks.add(level, groupId);
+
+interface Rec_check{
+    pupilId:string
+    teacherId:string
+    subjectId:string
+    lesson:number
+    mark:number
+}
+const record:Rec_check = {
+    pupilId: pupilId,
+    teacherId: teacherId,
+    subjectId: history1.title,
+    lesson: 1,
+    mark: 9
+  };
+  const record2:Rec_check = {
+    pupilId: pupilId2,
+    teacherId: teacherId2,
+    subjectId: math.title,
+    lesson: 5,
+    mark: 10
+  };
+  var gradebookId:string = gradebook.id;
+gradebooks.addRecord(gradebookId, record);
+//gradebooks.clear();
+
+const oliver = gradebooks.read(gradebookId, show0);
+
+const students = gradebooks.readAll(gradebookId);
+//console.log(students)
