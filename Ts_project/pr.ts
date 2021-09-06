@@ -285,6 +285,7 @@ const newTeacherId = teachers.update(teacherId, updatedProfile);
 //console.log(teachers.read(teacherId))
 teachers.remove(teacherId)
 //console.log(teachers.read(teacherId))
+//-------------
 //pupil
 class  Pupils{
 
@@ -428,6 +429,8 @@ var  fullpupil = pupils.read(pupil2.id);
 pupils.remove(pupil.id);
 //console.log(pupils.read(pupil.id));
 
+//-----------------
+
 //groups
 
 class Groups{
@@ -494,6 +497,10 @@ groups.update(groupId, {
   });
 groups.read(groupId);
 groups.readAll()
+
+
+//-------------------
+
 //gradebook
 
 class Gradebooks{
